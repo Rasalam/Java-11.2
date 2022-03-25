@@ -1,24 +1,27 @@
 package ru.netology;
 
-public class PosterManager {
-    int maxLengthMovieList = 10;
+public class AfishaManager {
+    int maxLengthMovieList;
+    private AfishaRepository repository = new AfishaRepository();
 
-    public PosterManager() {
+    public AfishaManager() {
+
     }
 
-    private MovieItem[] items = new MovieItem[0];
+    public AfishaManager(int maxLengthMovieList) {
+        this.maxLengthMovieList = maxLengthMovieList;
+        this.repository = new AfishaRepository();
+
+    }
 
     public void addMovie(MovieItem item) {
-        int length = items.length + 1;
-        MovieItem[] tmp = new MovieItem[length];
-        System.arraycopy(items, 0, tmp, 0, items.length);
-        int lastIndex = tmp.length - 1;
-        tmp[lastIndex] = item;
-        items = tmp;
+        repository.save(item);
     }
+
 
     public MovieItem[] getMovieList() {
         int resultLength;
+        MovieItem[] items = repository.findAll();
         if (items.length > maxLengthMovieList) {
             resultLength = maxLengthMovieList;
         } else resultLength = items.length;
@@ -29,6 +32,4 @@ public class PosterManager {
         }
         return result;
     }
-
 }
-

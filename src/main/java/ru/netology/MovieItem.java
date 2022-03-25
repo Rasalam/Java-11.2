@@ -14,4 +14,8 @@ public class MovieItem {
         this.imagePosterURL = imagePosterURL;
     }
 
+    public int getId() {
+        return id;
+    }
+
 }
